@@ -11,15 +11,74 @@
 {% block content %}
 
 <section>
-    <h4>Guiding You through Investing</h4>
-    <p>Lighthouse investments</p>
+
+    <div class="intro">
+        <h4>Guiding You through Investing</h4>
+    </div>
+    <div class="section-img">
+        <img src="{% static 'img/homepage-illustration.svg' %}" alt="">
+    </div>
+
 
 </section>
 
 <main>
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque porro odit quo autem alias obcaecati numquam at
-        fuga doloribus. Enim facilis officia necessitatibus ea quo delectus. Quia expedita corrupti aut corporis
-        aspernatur culpa, asperiores facere pariatur voluptatem repudiandae, dignissimos blanditiis possimus quas
-        voluptas consequatur nihil sunt maxime excepturi dolores sint!</p>
+    <div id="app">
+        <ul>
+            <li>data[0].attributes.title </li>
+        </ul>
+
+    </div>
+
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    /*
+        const options = {
+            method: 'GET',
+            url: 'https://seeking-alpha.p.rapidapi.com/news/v2/list-trending',
+            params: { until: '0', since: '0', size: '20' },
+            headers: {
+                'x-rapidapi-host': 'seeking-alpha.p.rapidapi.com',
+                'x-rapidapi-key': '3626506961msh6043bed195d39acp11b912jsna00bcc337f5c'
+            }
+        };
+    
+        axios.request(options).then(function (response) {
+            console.log(response.data);
+        }).catch(function (error) {
+            console.error(error);
+        });*/
+
+
+    const vm = new Vue({
+        el: "#app",
+        delimiters: ['[[', ']]'],
+        data: {
+            news: [],
+        },
+        methods: {
+            loadNews: function () {
+                axios({
+                    method: 'GET',
+                    url: 'https://seeking-alpha.p.rapidapi.com/news/v2/list-trending',
+                    params: { until: '0', since: '0', size: '5' },
+                    headers: {
+                        'x-rapidapi-host': 'seeking-alpha.p.rapidapi.com',
+                        'x-rapidapi-key': '3626506961msh6043bed195d39acp11b912jsna00bcc337f5c'
+                    }
+                }).then(response => {
+                    this.news = response.data
+                })
+            }
+        },
+        mounted: function () {
+            this.loadNews()
+        }
+    })
+
+
+</script>
 {% endblock %}
