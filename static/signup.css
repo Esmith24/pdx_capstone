@@ -1,0 +1,302 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #38277e;
+}
+
+/*.main-grid-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 8vh 50vh 100vh 15vh;
+      grid-template-areas:
+        "nav      nav"
+        "section  section"
+        "main     main"
+        "footer   footer";
+    }*/
+
+nav {
+  grid-area: nav;
+  background-color: #222;
+  padding: 5px 20px;
+}
+
+.nav-links ul {
+  list-style: none;
+}
+
+.nav-links li {
+  font-size: 1rem;
+  padding: 15px 5px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.nav-links li a {
+  display: block;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #5c3fcf;
+}
+
+.logo a {
+  font-size: 20px;
+}
+
+.button.secondary {
+  border-bottom: 1px #444 solid;
+}
+
+/* signup page */
+.signin-container {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(255, 255, 255);
+  width: 60%;
+  height: 39rem;
+  overflow: hidden;
+  border-radius: 25px;
+}
+.signin-container p {
+  margin: 1rem 0;
+}
+
+.header {
+  text-align: center;
+  border: 1px solid silver;
+  padding: 1rem 0rem;
+}
+
+form {
+  margin: 1rem 1rem;
+}
+
+label {
+  color: silver;
+}
+
+#id_username {
+  width: 100%;
+  height: 2rem;
+  outline: none;
+}
+
+#id_password1 {
+  width: 100%;
+  height: 2rem;
+  outline: none;
+}
+#id_password2 {
+  width: 100%;
+  height: 2rem;
+  outline: none;
+}
+
+#id_email {
+  width: 100%;
+  height: 2rem;
+  outline: none;
+}
+
+.helptext {
+  padding: 0 10px;
+  margin: 1rem 0;
+}
+
+li {
+  margin: 0.5rem 1rem;
+}
+
+.signin-container button {
+  width: 100%;
+  height: 3rem;
+  border-radius: 25px;
+  outline: none;
+  background-color: #4c35aa;
+  color: aliceblue;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 1rem 0;
+  cursor: pointer;
+}
+.login-link {
+  text-align: center;
+}
+
+main {
+  grid-area: main;
+  background-color: rgb(247, 243, 243);
+}
+
+footer {
+  background-color: black;
+  color: #ffffff;
+  grid-area: footer;
+}
+
+.footer-logo {
+  text-align: center;
+  margin: 2rem;
+  font-size: 2rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer-links li {
+  list-style: none;
+  padding: 0.5rem;
+}
+.footer-links a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.footer-links a:hover {
+  color: #4b369e;
+}
+
+.footer-p {
+  text-align: center;
+  margin: 1rem;
+}
+
+/* Mobile */
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle {
+  order: 1;
+}
+.item.button {
+  order: 2;
+}
+.item {
+  width: 100%;
+  text-align: center;
+  order: 3;
+  display: none;
+}
+
+.item.active {
+  display: block;
+}
+
+.toggle {
+  cursor: pointer;
+}
+
+.bars {
+  background-color: #999;
+  display: inline-block;
+  height: 2px;
+  position: relative;
+  width: 18px;
+}
+
+.bars::before,
+.bars::after {
+  background-color: #999;
+  content: "";
+  display: inline-block;
+  height: 2px;
+  position: absolute;
+  width: 18px;
+}
+.bars::before {
+  top: 5px;
+}
+.bars::after {
+  top: -5px;
+}
+
+/* tablet  */
+
+@media screen and (min-width: 469px) {
+  .nav-links {
+    justify-content: center;
+  }
+  .logo {
+    flex: 1;
+  }
+  .item.button {
+    width: auto;
+    order: 1;
+    display: block;
+  }
+
+  .toggle {
+    order: 2;
+  }
+  .button.secondary {
+    border: 0;
+  }
+
+  .button a {
+    text-decoration: none;
+    padding: 7px 15px;
+    background-color: #38277e;
+    border: 1px solid #38277e;
+    border-radius: 50em;
+  }
+  .button.secondary a {
+    background: transparent;
+  }
+  .button a:hover {
+    transition: all 0.25s;
+  }
+  .button:not(.secondary) a:hover {
+    background: #444;
+    border-color: #38277e;
+  }
+
+  .button.secondary a:hover {
+    color: #ddd;
+  }
+}
+
+/* desktop  */
+@media screen and (min-width: 768px) {
+  .item {
+    display: block;
+    width: auto;
+  }
+  .toggle {
+    display: none;
+  }
+  .logo {
+    order: 0;
+  }
+  .item {
+    order: 1;
+  }
+  .button {
+    order: 2;
+  }
+  .nav-links li {
+    padding: 15px 10px;
+  }
+  .nav-links li.button {
+    padding-right: 0;
+  }
+}

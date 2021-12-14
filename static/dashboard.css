@@ -1,0 +1,126 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 25vw 1fr 1fr;
+  grid-template-rows: 15vh auto auto auto;
+  grid-template-areas:
+    "header header header"
+    "aside main main"
+    "aside main main"
+    "footer footer footer";
+}
+
+header {
+  background: linear-gradient(to top, #050512 17.37%, #140d2e 106.9%);
+  grid-area: header;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-nav-item a {
+  color: aliceblue;
+  text-decoration: none;
+  justify-content: center;
+  font-size: 3rem;
+  font-family: "Oswald", sans-serif;
+}
+
+aside {
+  grid-area: aside;
+  background: -webkit-linear-gradient(288deg, #050512 17.37%, #38277e 106.9%);
+}
+
+#profile-pic {
+  margin-top: 1rem;
+  border-radius: 50%;
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+}
+#profile {
+  text-decoration: none;
+  border-bottom: 1px solid silver;
+}
+
+.links-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  border-top: 1px solid silver;
+}
+
+.links-flex a {
+  color: aliceblue;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+}
+
+.section-1 {
+}
+
+.section-2 {
+}
+.cryptoInput {
+  text-align: center;
+  border: 1px solid black;
+  width: 10rem;
+}
+.stock-input {
+  text-align: center;
+  border: 1px solid black;
+  width: 10rem;
+}
+
+.crypto-input {
+  margin: 1rem;
+}
+
+main {
+  grid-area: main;
+  min-height: 100vh;
+  background-color: #c2bebe79;
+  color: black;
+  padding: 3rem 1rem;
+}
+
+footer {
+  background-color: black;
+  color: #ffffff;
+  grid-area: footer;
+}
+
+.footer-logo {
+  text-align: center;
+  margin: 2rem;
+  font-size: 2rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer-links li {
+  list-style: none;
+  padding: 0.5rem;
+}
+.footer-links a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.footer-links a:hover {
+  color: #4b369e;
+}
+
+.footer-p {
+  text-align: center;
+  margin: 1rem;
+}

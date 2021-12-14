@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Poppins:wght@500&display=swap"
+        rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(function () {
+
+            $(".toggle").on("click", function () {
+
+                if ($(".item").hasClass("active")) {
+                    $(".item").removeClass("active");
+
+                }
+                else {
+                    $(".item").addClass("active");
+                }
+            })
+        });
+    </script>
+
+    <title>{% block title %}Lighthouse Investment{% endblock %}</title>
+</head>
+
+<body>
+
+    <nav>
+        <ul class="nav-links">
+            <li class="logo"><a href="{% url 'home' %}">Lighthouse investments</a></li>
+            <li class="item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="item"><a href="#">About</a></li>
+            <li class="item"><a href="#">Strategy</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li class="item button"><a href="{% url 'login' %}">Login</a></li>
+            <li class="item button secondary"><a href="{% url 'signup' %}">Sign up</a></li>
+            <li class="toggle"><span class="bars"></span></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        <h3 class="footer-logo">Lighthouse Investments</h3>
+        <ul class="footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Research Center</a></li>
+            <li><a href="#">Help Center</a></li>
+        </ul>
+        <div class="footer-p">
+            <p>Investors should carefully consider the investment objectives and risks before investing!</p>
+            <p>&copy2021 Lighthouse Investments</p>
+        </div>
+    </footer>
+
+
+
+</body>
+
+</html>

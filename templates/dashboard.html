@@ -1,0 +1,362 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Poppins:wght@500&display=swap"
+        rel="stylesheet">
+
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        {% csrf_token %}
+        <div class="grid-container">
+            <header class="b-header">
+                <div class="header-nav-item">
+                    <a href="{% url 'home' %}">Lighthouse investments</a>
+                </div>
+            </header>
+
+            <aside>
+                <div class="links-flex">
+                    <img src="{% static 'img/profile.jpeg'%}" alt="" id="profile-pic">
+                    <h3><a href="{% url 'profile' %}" id="profile">{{ user.username }}</a></h3>
+                    <a href="{% url 'home' %}">HOME</a>
+                    <a href="#">ABOUT</a>
+                    <a href="#">CRYPTO</a>
+                    <a href="#">STOCK</a>
+                </div>
+            </aside>
+
+
+            {% csrf_token %}
+            <main>
+                <h2>Stock Tracker</h2>
+                <div v-for="object in stock">
+                    <table border="1" width="500" cellspacing="1">
+                        <tr>
+                            <td>Symbol</td>
+                            <td>quantity</td>
+                            <td>cost per share</td>
+                            <td>asset</td>
+                            <td>long/short</td>
+                        </tr>
+                        <tr>
+                            <td>[[object.symbol]]</td>
+                            <td>[[object.quantity]]</td>
+                            <td>[[object.cost_per_share]]</td>
+                            <td>[[object.asset]]</td>
+                            <td>[[object.long_or_short]]</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="stock-input">
+                    <h3>Enter your Asset</h3>
+                    <input type="text" v-model="stock_symbol" placeholder="Ticker"><br>
+                    <input type="text" v-model="stock_quantity" placeholder="Quantity"><br>
+                    <input type="text" v-model="stock_cost_per_share" placeholder="Cost"><br>
+
+                    <br><label for="">Asset</label><br>
+                    <select v-model="stock_asset" name="stock_long_or_short" id="stock-select">
+                        <option value="Equites">Equites</option>
+                        <option value="Bonds">Bonds</option>
+                        <option value="Futures">Futures</option>
+                    </select>
+                    <br><label for="">Long/Short</label><br>
+                    <select v-model="stock_long_or_short" name="stock_long_or_short" id="">
+                        <option value="Long">Long</option>
+                        <option value="Short">Short</option>
+                    </select>
+                    <br><button @click="createStock">Submit</button>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="myChart1">
+
+                    </canvas>
+                </div>
+
+                <div class="section-1">
+                    <h2>Crypto Tracker</h2>
+                    <div v-for="object in crypto">
+                        <table border="1" width="500" cellspacing="1">
+                            <tr>
+                                <td>Symbol</td>
+                                <td>quantity</td>
+                                <td>cost per share</td>
+                                <td>asset</td>
+                                <td>long/short</td>
+                            </tr>
+                            <tr>
+                                <td>[[object.symbol]]</td>
+                                <td>[[object.quantity]]</td>
+                                <td>[[object.cost_per_share]]</td>
+                                <td>[[object.asset]]</td>
+                                <td>[[object.long_or_short]]</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-2">
+                    <div class="cryptoInput">
+                        <h3>Enter your Asset</h3>
+                        <input type="text" v-model="crypto_symbol" placeholder="Ticker"><br>
+                        <input type="text" v-model="crypto_quantity" placeholder="Quantity"><br>
+                        <input type="text" v-model="crypto_cost_per_share" placeholder="Cost"><br>
+
+                        <label for="">Asset</label><br>
+                        <select v-model="crypto_asset" name="crypto_long_or_short" id="">
+                            <option value="BTC">Bitcoin</option>
+                            <option value="L1">L1</option>
+                            <option value="L2">L2</option>
+                            <option value="G">Gaming/Metaverse</option>
+                        </select>
+
+                        <br><label for="">Long/Short</label><br>
+                        <select v-model="crypto_long_or_short" name="crypto_long_or_short" id="">
+                            <option value="Long">Long</option>
+                            <option value="Short">Short</option>
+                        </select>
+                        <br>
+                        <button @click="createCrypto">Submit</button>
+                    </div>
+                </div>
+
+
+                <div class="chart-container">
+                    <canvas id="myChart2">
+
+                    </canvas>
+                </div>
+
+            </main>
+
+            <footer>
+                <h3 class="footer-logo">Lighthouse Investments</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Research Center</a></li>
+                    <li><a href="#">Help Center</a></li>
+                </ul>
+                <div class="footer-p">
+                    <p>Investors should carefully consider the investment objectives and risks before investing!</p>
+                    <p>&copy2021 Lighthouse Investments</p>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+
+        const vm = new Vue({
+            el: "#app",
+            delimiters: ['[[', ']]'],
+            data: {
+
+                stock: [],
+                crypto: [],
+
+                userStock: {
+                    "symbol": "",
+                    "quantity": "",
+                    "cost_per_share": "",
+                    "asset": "",
+                    "long_or_short": "",
+                },
+
+                userCrypto: {
+                    "symbol": "",
+                    "quantity": "",
+                    "cost_per_share": "",
+                    "asset": "",
+                    "long_or_short": "",
+                },
+
+                stock_symbol: "",
+                stock_quantity: "",
+                stock_cost_per_share: "",
+                stock_asset: "",
+                stock_long_or_short: "",
+
+                crypto_symbol: "",
+                crypto_quantity: "",
+                crypto_cost_per_share: "",
+                crypto_asset: "",
+                crypto_long_or_short: "",
+            },
+
+            /* chart.js */
+            mounted() {
+                async function getData() {
+                    const apiUrl = 'http://127.0.0.1:8000/api/v1/stock/'
+                    const response = await fetch(apiUrl)
+                    const PieChartData = await response.json()
+
+                    const qty = PieChartData[0].quantity
+                    console.log(PieChartData)
+                    console.log(qty)
+                }
+                getData()
+
+                const labels = [
+                    'January',
+                    'February',
+                    'March',
+                    'April',
+                    'May',
+
+                ];
+                const data = {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Portfolio',
+                        backgroundColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)'
+                        ],
+                        hoverOffset: 4,
+                        borderColor: 'rgb(255, 99, 132)',
+                        data: []
+                    }]
+                };
+
+                const config = {
+                    type: 'doughnut',
+                    data: data,
+                    options: {}
+                };
+
+                const myChart1 = new Chart(
+                    document.getElementById('myChart1').getContext('2d'),
+                    config
+                );
+
+                const myChart2 = new Chart(
+                    document.getElementById('myChart2').getContext('2d'),
+                    config);
+
+            },
+
+
+            methods: {
+                loadAllStocks: function () {
+                    axios({
+                        method: 'get',
+                        url: 'http://127.0.0.1:8000/api/v1/stock/',
+
+                    }).then(response => {
+                        this.stock = response.data
+                    })
+                },
+
+
+                createStock: function () {
+                    let csrf = document.querySelector("input[name=csrfmiddlewaretoken]").value
+
+                    axios({
+                        method: 'post',
+                        url: 'http://127.0.0.1:8000/api/v1/stock/',
+
+                        header: {
+                            "X-CSRFToken": csrf
+                        },
+
+                        data: {
+                            "symbol": this.stock_symbol,
+                            "quantity": this.stock_quantity,
+                            "cost_per_share": this.stock_cost_per_share,
+                            "asset": this.stock_asset,
+                            "long_or_short": this.stock_long_or_short,
+
+                        }
+
+                    })//.catch(handleErrors)
+                        .then(response => {
+                            this.userStock = {
+                                "symbol": "",
+                                "quantity": "",
+                                "cost_per_share": "",
+                                "asset": "",
+                                "long_or_short": "",
+                            }
+                            this.loadAllStocks()
+                            this.userStock = response.data
+                        })
+                },
+
+                /*-------Crypto tracker--------*/
+                loadAllCrypto: function () {
+                    axios({
+                        method: 'get',
+                        url: 'http://127.0.0.1:8000/api/v1/crypto/',
+
+                    }).then(response => {
+                        this.crypto = response.data
+                        //.catch(handleErrors)
+                    })
+                },
+
+                createCrypto: function () {
+                    let csrf = document.querySelector("input[name=csrfmiddlewaretoken]").value
+
+                    axios({
+                        method: 'post',
+                        url: 'http://127.0.0.1:8000/api/v1/crypto/',
+
+                        header: {
+                            "X-CSRFToken": csrf
+                        },
+                        data: {
+                            "symbol": this.crypto_symbol,
+                            "quantity": this.crypto_quantity,
+                            "cost_per_share": this.crypto_cost_per_share,
+                            "asset": this.crypto_asset,
+                            "long_or_short": this.crypto_long_or_short,
+                        }
+
+                    })//.catch(handleErrors)
+                        .then(response => {
+                            this.userCrypto = {
+                                "symbol": "",
+                                "quantity": "",
+                                "cost_per_share": "",
+                                "asset": "",
+                                "long_or_short": "",
+                            }
+                            this.loadAllCrypto()
+                            this.userCrypto = response.data
+                        })
+                },
+
+            },
+            created: function () {
+                this.loadAllStocks(),
+                    this.loadAllCrypto()
+            },
+        })
+
+    </script>
+
+</body>
+
+</html>
