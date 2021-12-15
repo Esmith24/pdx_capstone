@@ -13,9 +13,9 @@
 <section>
 
     <div class="intro">
-        <h4>Guiding You through Investing</h4>
+        <h4>Guiding You Through <span>Investing</span></h4>
     </div>
-    <div class="section-img">
+    <div class="intro-img">
         <img src="{% static 'img/homepage-illustration.svg' %}" alt="">
     </div>
 
@@ -23,48 +23,99 @@
 </section>
 
 <main>
+    <h3 id="news-header">News</h3>
     <div id="app">
-        <ul>
-            <li>data[0].attributes.title </li>
-        </ul>
+        <div class="article-grid-container">
+            <aside>
+                <div class="content-container">
+                    <div class="aside-content one">
+                        [[stock.marketSummaryAndSparkResponse.result[0].shortName]]
+                    </div>
+                    <div class="aside-content two">
 
+                    </div>
+                    <div class="aside-content three">
+
+                    </div>
+                </div>
+            </aside>
+
+            <article class="main-article-1">
+                <div class="main-img-container">
+                    <img id="main-article-img" :src="[[ news.data[0].links.uriImage ]]" alt="">
+                </div>
+                <br>
+                <div class="main-article-info">
+                    [[ news.data[0].attributes.title ]]
+                    <a :href="[[ news.data[0].links.canonical ]]" target="_blank">To article</a>
+                </div>
+
+            </article>
+            <article class="article-2 secondary">
+                <div class="img-container">
+                    <img id="article-img" :src="[[ news.data[1].links.uriImage ]]" alt="">
+                </div>
+                <br>
+                <div class="article-info">
+                    [[ news.data[1].attributes.title ]]
+                    <a :href="[[ news.data[1].links.canonical ]]" target="_blank">To article</a>
+                </div>
+
+            </article>
+            <article class="article-3 secondary">
+                <div class="img-container">
+                    <img id="article-img" :src="[[ news.data[2].links.uriImage ]]" alt="">
+                </div>
+                <br>
+                <div class="article-info">
+                    [[ news.data[2].attributes.title ]]
+                    <a :href="[[ news.data[2].links.canonical ]]" target="_blank">To article</a>
+                </div>
+
+            </article>
+            <article class="article-4 secondary">
+                <div class="img-container">
+                    <img id="article-img" :src="[[ news.data[3].links.uriImage ]]" alt="">
+                </div>
+                <br>
+                <div class="article-info">
+                    [[ news.data[3].attributes.title ]]
+                    <a :href="[[ news.data[3].links.canonical ]]" target="_blank">To article</a>
+                </div>
+
+            </article>
+            <article class="article-5 secondary">
+                <div class="img-container">
+                    <img id="article-img" :src="[[ news.data[4].links.uriImage ]]" alt="">
+                </div>
+                <br>
+                <div class="article-info">
+                    [[ news.data[4].attributes.title ]]
+                    <a :href="[[ news.data[4].links.canonical ]]" target="_blank">To article</a>
+                </div>
+
+            </article>
+        </div>
     </div>
-
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    /*
-        const options = {
-            method: 'GET',
-            url: 'https://seeking-alpha.p.rapidapi.com/news/v2/list-trending',
-            params: { until: '0', since: '0', size: '20' },
-            headers: {
-                'x-rapidapi-host': 'seeking-alpha.p.rapidapi.com',
-                'x-rapidapi-key': '3626506961msh6043bed195d39acp11b912jsna00bcc337f5c'
-            }
-        };
-    
-        axios.request(options).then(function (response) {
-            console.log(response.data);
-        }).catch(function (error) {
-            console.error(error);
-        });*/
-
 
     const vm = new Vue({
         el: "#app",
         delimiters: ['[[', ']]'],
         data: {
             news: [],
+            stock: [],
         },
         methods: {
             loadNews: function () {
                 axios({
                     method: 'GET',
                     url: 'https://seeking-alpha.p.rapidapi.com/news/v2/list-trending',
-                    params: { until: '0', since: '0', size: '5' },
+                    params: { until: '0', since: '0', size: '7' },
                     headers: {
                         'x-rapidapi-host': 'seeking-alpha.p.rapidapi.com',
                         'x-rapidapi-key': '3626506961msh6043bed195d39acp11b912jsna00bcc337f5c'
@@ -72,10 +123,24 @@
                 }).then(response => {
                     this.news = response.data
                 })
+            },
+            loadStock: function () {
+                axios({
+                    method: 'get',
+                    url: 'https://yh-finance.p.rapidapi.com/market/v2/get-summary',
+                    params: { region: 'US' },
+                    headers: {
+                        'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
+                        'x-rapidapi-key': '3626506961msh6043bed195d39acp11b912jsna00bcc337f5c'
+                    }
+                }).then(response => {
+                    this.stock = response.data
+                })
             }
         },
         mounted: function () {
             this.loadNews()
+            this.loadStock()
         }
     })
 

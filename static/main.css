@@ -58,26 +58,101 @@ a:hover {
 section {
   grid-area: section;
   background: -webkit-linear-gradient(288deg, #050512 17.37%, #38277e 106.9%);
-  height: 40vh;
+  height: 50vh;
   overflow: hidden;
+}
+
+aside {
+  display: none;
 }
 
 .intro {
   font-size: 3rem;
   padding: 1rem 1rem;
+  width: 50%;
+  line-height: 4.5rem;
 }
 
-.section-img {
-  padding-left: 2rem;
-  width: 100%;
-  height: 20rem;
-  overflow: hidden;
+.intro-img {
+  width: 50%;
+  transform: translate(95%, -12%);
 }
 
 main {
-  grid-area: main;
-  height: 100vh;
-  background-color: rgb(102, 99, 99);
+  color: #050512;
+}
+
+.article-grid-container {
+  height: 250vh;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    " article-1 "
+    " article-2 "
+    " article-3 "
+    " article-4 "
+    " article-5 "
+    "   footer    ";
+}
+
+#news-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  height: 6rem;
+  margin: 3rem 0 2rem 0;
+}
+
+.main-article-1 {
+  grid-area: article-1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+.main-img-container {
+  width: 100%;
+}
+
+#main-article-img {
+  object-fit: cover;
+  width: 100%;
+  max-height: 14rem;
+}
+
+#article-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.article-info {
+  width: 20rem;
+  height: 1rem;
+}
+
+.secondary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.article-2 {
+  grid-area: article-2;
+}
+.article-3 {
+  grid-area: article-3;
+}
+.article-4 {
+  grid-area: article-4;
+}
+.article-5 {
+  grid-area: article-5;
 }
 
 footer {
@@ -171,7 +246,7 @@ footer {
 
 /* tablet  */
 
-@media screen and (min-width: 469px) {
+@media screen and (min-width: 715px) {
   .nav-links {
     justify-content: center;
   }
@@ -212,10 +287,62 @@ footer {
   .button.secondary a:hover {
     color: #ddd;
   }
+
+  .intro {
+    font-size: 3rem;
+    padding: 1rem 1rem;
+    width: 50%;
+    line-height: 4.5rem;
+    transform: translate(30%, 10%);
+  }
+
+  .intro-img {
+    width: 50%;
+    transform: translate(95%, -12%);
+  }
+
+  .article-grid-container {
+    height: 80rem;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 50px 1fr 1fr 50px;
+    grid-template-areas:
+      ". article-1 article-1 ."
+      ". article-2 article-3 ."
+      ". article-4 article-5 .";
+  }
+
+  .main-article-1 {
+    grid-area: article-1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .main-img-container {
+    width: 90%;
+  }
+
+  #main-article-img {
+    object-fit: cover;
+    width: 100%;
+    max-height: 20rem;
+  }
+
+  #article-img {
+    border: 1px solid black;
+    height: 15rem;
+    width: 25rem;
+    object-fit: cover;
+  }
+  aside {
+    display: none;
+  }
 }
 
 /* desktop  */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1100px) {
   .item {
     display: block;
     width: auto;
@@ -237,5 +364,81 @@ footer {
   }
   .nav-links li.button {
     padding-right: 0;
+  }
+  .intro {
+    font-size: 3rem;
+    padding: 1rem 1rem;
+    width: 50%;
+    line-height: 4.5rem;
+    transform: translate(25%, 10%);
+  }
+
+  .intro-img {
+    width: 50%;
+    transform: translate(95%, -12%);
+  }
+
+  #news-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 5rem;
+    height: 6rem;
+    margin: 3rem 4rem;
+    border-bottom: 1px solid silver;
+  }
+
+  aside {
+    color: #050512;
+    grid-area: aside;
+    display: block;
+  }
+
+  .content-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .aside-content {
+    border: 1px solid silver;
+    height: 360px;
+    width: 85%;
+    margin: 2rem 0;
+  }
+
+  .article-grid-container {
+    height: 80rem;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 25px 1fr 1fr 1fr;
+    grid-template-areas:
+      ". article-1 article-1 aside"
+      ". article-2 article-3 aside"
+      ". article-4 article-5 aside";
+  }
+
+  .main-article-1 {
+    grid-area: article-1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50rem;
+  }
+  .main-img-container {
+    width: 100%;
+  }
+
+  #main-article-img {
+    object-fit: cover;
+    width: 44rem;
+    max-height: 24rem;
+  }
+
+  #article-img {
+    border: 1px solid black;
+    height: 15rem;
+    width: 18rem;
+    object-fit: cover;
   }
 }
