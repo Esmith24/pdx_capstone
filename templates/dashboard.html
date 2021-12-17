@@ -204,59 +204,6 @@
                 crypto_long_or_short: "",
             },
 
-            /* chart.js */
-            mounted() {
-                async function getData() {
-                    const apiUrl = 'http://127.0.0.1:8000/api/v1/stock/'
-                    const response = await fetch(apiUrl)
-                    const PieChartData = await response.json()
-
-                    const qty = PieChartData[0].quantity
-                    console.log(PieChartData)
-                    console.log(qty)
-                }
-                getData()
-
-                const labels = [
-                    'January',
-                    'February',
-                    'March',
-                    'April',
-                    'May',
-
-                ];
-                const data = {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Portfolio',
-                        backgroundColor: [
-                            'rgb(255, 99, 132)',
-                            'rgb(54, 162, 235)',
-                            'rgb(255, 205, 86)'
-                        ],
-                        hoverOffset: 4,
-                        borderColor: 'rgb(255, 99, 132)',
-                        data: []
-                    }]
-                };
-
-                const config = {
-                    type: 'doughnut',
-                    data: data,
-                    options: {}
-                };
-
-                const myChart1 = new Chart(
-                    document.getElementById('myChart1').getContext('2d'),
-                    config
-                );
-
-                const myChart2 = new Chart(
-                    document.getElementById('myChart2').getContext('2d'),
-                    config);
-
-            },
-
 
             methods: {
                 loadAllStocks: function () {
@@ -266,6 +213,7 @@
 
                     }).then(response => {
                         this.stock = response.data
+                        this.loadStockchart()
                     })
                 },
 
@@ -346,6 +294,53 @@
                             this.loadAllCrypto()
                             this.userCrypto = response.data
                         })
+                },
+                loadStockchart: function () {
+                    let dataArray = []
+                    console.log(this.stock)
+                    for (stock of this.stock) {
+                        dataArray.push(stock.quantity)
+                        console.log(stock)
+                    }
+
+                    const labels = [
+                        'January',
+                        'February',
+                        'March',
+                        'April',
+                        'May',
+                    ];
+
+                    const data = {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Portfolio',
+                            backgroundColor: [
+                                'rgb(255, 99, 132)',
+                                'rgb(54, 162, 235)',
+                                'rgb(255, 205, 86)'
+                            ],
+                            hoverOffset: 4,
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: dataArray,
+                        }]
+                    };
+
+                    const config = {
+                        type: 'line',
+                        data: data,
+                        options: {}
+                    };
+
+                    const myChart1 = new Chart(
+                        document.getElementById('myChart1').getContext('2d'),
+                        config
+                    );
+
+                    const myChart2 = new Chart(
+                        document.getElementById('myChart2').getContext('2d'),
+                        config
+                    );
                 },
 
             },

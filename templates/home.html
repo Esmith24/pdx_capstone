@@ -10,15 +10,13 @@
 
 {% block content %}
 
-<section>
-
+<section class="intro-section">
     <div class="intro">
         <h4>Guiding You Through <span>Investing</span></h4>
     </div>
     <div class="intro-img">
         <img src="{% static 'img/homepage-illustration.svg' %}" alt="">
     </div>
-
 
 </section>
 
@@ -51,7 +49,7 @@
                 </div>
 
             </article>
-            <article class="article-2 secondary">
+            <article class="article-2 secondary-article">
                 <div class="img-container">
                     <img id="article-img" :src="[[ news.data[1].links.uriImage ]]" alt="">
                 </div>
@@ -62,7 +60,7 @@
                 </div>
 
             </article>
-            <article class="article-3 secondary">
+            <article class="article-3 secondary-article">
                 <div class="img-container">
                     <img id="article-img" :src="[[ news.data[2].links.uriImage ]]" alt="">
                 </div>
@@ -73,7 +71,7 @@
                 </div>
 
             </article>
-            <article class="article-4 secondary">
+            <article class="article-4 secondary-article">
                 <div class="img-container">
                     <img id="article-img" :src="[[ news.data[3].links.uriImage ]]" alt="">
                 </div>
@@ -84,7 +82,7 @@
                 </div>
 
             </article>
-            <article class="article-5 secondary">
+            <article class="article-5 secondary-article">
                 <div class="img-container">
                     <img id="article-img" :src="[[ news.data[4].links.uriImage ]]" alt="">
                 </div>
@@ -98,6 +96,21 @@
         </div>
     </div>
 </main>
+
+<div class="newsletter-container">
+    <section class="newsletter-section">
+        <h3 id="newsletter-head">Newsletter</h3>
+        <div class="newsletter">
+            <label for="">First Name</label>
+            <input type="text">
+            <label for="">Last Name</label>
+            <input type="text">
+            <label for="">Email</label>
+            <input type="text">
+            <button>Submit</button>
+        </div>
+    </section>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

@@ -42,9 +42,10 @@
             <li class="item"><a href="#">Strategy</a></li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}">Logout</a></li>
+            <li><a href="{% url 'dashboard-home' %}">Dashboard</a></li>
             {% else %}
             <li class="item button"><a href="{% url 'login' %}">Login</a></li>
-            <li class="item button secondary"><a href="{% url 'signup' %}">Sign up</a></li>
+            <li class="item button secondary-nav"><a href="{% url 'signup' %}">Sign up</a></li>
             <li class="toggle"><span class="bars"></span></li>
             {% endif %}
         </ul>
@@ -54,16 +55,25 @@
     {% endblock %}
 
     <footer>
-        <h3 class="footer-logo">Lighthouse Investments</h3>
-        <ul class="footer-links">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#">Research Center</a></li>
-            <li><a href="#">Help Center</a></li>
-        </ul>
-        <div class="footer-p">
-            <p>Investors should carefully consider the investment objectives and risks before investing!</p>
-            <p>&copy2021 Lighthouse Investments</p>
+        <div class="footer-grid">
+            <h3 class="footer-logo">Lighthouse Investments</h3>
+            <ul class="footer-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Research Center</a></li>
+                <li><a href="#">Help Center</a></li>
+            </ul>
+            <h4 class="social-header">Social</h4>
+            <div class="social-links">
+                <img src="https://img.icons8.com/color/48/000000/facebook-circled--v1.png" />
+                <img src="https://img.icons8.com/color/48/000000/twitter-circled--v5.png" />
+                <img src="https://img.icons8.com/color/48/000000/linkedin-circled--v5.png" />
+                <img src="https://img.icons8.com/color/48/000000/play-button-circled--v3.png" />
+            </div>
+            <div class="footer-info">
+                <p>Investors should carefully consider the investment objectives and risks before investing!</p>
+                <p>&copy2021 Lighthouse Investments</p>
+            </div>
         </div>
     </footer>
 
