@@ -36,6 +36,12 @@ aside {
   background: -webkit-linear-gradient(288deg, #050512 17.37%, #38277e 106.9%);
 }
 
+.delete-btn {
+  background-color: red;
+  color: white;
+  width: 100%;
+}
+
 #profile-pic {
   margin-top: 1rem;
   border-radius: 50%;

@@ -12,9 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Poppins:wght@500&display=swap"
         rel="stylesheet">
-
-
-    <title>Document</title>
+    <title>Dashboard</title>
 </head>
 
 <body>
@@ -50,6 +48,7 @@
                             <td>cost per share</td>
                             <td>asset</td>
                             <td>long/short</td>
+                            <td>Delete</td>
                         </tr>
                         <tr>
                             <td>[[object.symbol]]</td>
@@ -57,6 +56,7 @@
                             <td>[[object.cost_per_share]]</td>
                             <td>[[object.asset]]</td>
                             <td>[[object.long_or_short]]</td>
+                            <td><button @click="createStock" class="delete-btn">Submit</button></td>
                         </tr>
                     </table>
                 </div>
@@ -82,9 +82,11 @@
                 </div>
 
                 <div class="chart-container">
-                    <canvas id="myChart1">
+                    <canvas id="myChart1"></canvas>
 
-                    </canvas>
+                    <input id="pushValue" type="text" class="">
+                    <button id="push">Submit</button>
+
                 </div>
 
                 <div class="section-1">
@@ -97,6 +99,7 @@
                                 <td>cost per share</td>
                                 <td>asset</td>
                                 <td>long/short</td>
+                                <td>Delete</td>
                             </tr>
                             <tr>
                                 <td>[[object.symbol]]</td>
@@ -104,6 +107,7 @@
                                 <td>[[object.cost_per_share]]</td>
                                 <td>[[object.asset]]</td>
                                 <td>[[object.long_or_short]]</td>
+                                <td><button @click="createCrypto" class="delete-btn">Submit</button></td>
                             </tr>
                         </table>
                     </div>
@@ -137,7 +141,6 @@
 
                 <div class="chart-container">
                     <canvas id="myChart2">
-
                     </canvas>
                 </div>
 
@@ -161,12 +164,10 @@
     </div>
 
 
-
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-
         const vm = new Vue({
             el: "#app",
             delimiters: ['[[', ']]'],
@@ -260,7 +261,9 @@
 
                     }).then(response => {
                         this.crypto = response.data
-                        //.catch(handleErrors)
+
+                    }).then(response => {
+                        this.loadcryptochart()
                     })
                 },
 
@@ -297,12 +300,51 @@
                 },
                 loadStockchart: function () {
                     let dataArray = []
-                    console.log(this.stock)
                     for (stock of this.stock) {
                         dataArray.push(stock.quantity)
-                        console.log(stock)
                     }
 
+                    const labels1 = [
+                        'MARA',
+                        'PLTR',
+                        'LCID',
+                        'LCID',
+                        'COIN',
+                    ];
+
+                    const data1 = {
+                        labels: labels1,
+                        datasets: [{
+                            label: 'Portfolio',
+                            backgroundColor: [
+                                '#5e42cc'
+                            ],
+                            barThickness: 50,
+                            hoverOffset: 4,
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: dataArray,
+                        }]
+                    };
+
+                    const config1 = {
+                        type: 'bar',
+                        data: data1,
+                        options: {}
+                    };
+
+                    const myChart1 = new Chart(
+                        document.getElementById('myChart1').getContext('2d'),
+                        config1
+                    )
+                },
+                loadcryptochart: function () {
+                    let CryptoDataArray = []
+                    console.log(this.crypto)
+                    for (cryptoObject of this.crypto) {
+                        CryptoDataArray.push(cryptoObject.quantity)
+                        console.log(cryptoObject.quantity)
+                    }
+                    console.log(CryptoDataArray)
                     const labels = [
                         'January',
                         'February',
@@ -316,41 +358,35 @@
                         datasets: [{
                             label: 'Portfolio',
                             backgroundColor: [
-                                'rgb(255, 99, 132)',
-                                'rgb(54, 162, 235)',
-                                'rgb(255, 205, 86)'
+                                '#5e42cc'
                             ],
                             hoverOffset: 4,
                             borderColor: 'rgb(255, 99, 132)',
-                            data: dataArray,
+                            data: CryptoDataArray,
                         }]
                     };
 
                     const config = {
-                        type: 'line',
+                        type: 'bar',
                         data: data,
                         options: {}
                     };
-
-                    const myChart1 = new Chart(
-                        document.getElementById('myChart1').getContext('2d'),
-                        config
-                    );
-
                     const myChart2 = new Chart(
                         document.getElementById('myChart2').getContext('2d'),
                         config
                     );
                 },
+                deleteStock: function () {
 
+                }
             },
             created: function () {
                 this.loadAllStocks(),
                     this.loadAllCrypto()
-            },
+            }
         })
-
     </script>
+
 
 </body>
 

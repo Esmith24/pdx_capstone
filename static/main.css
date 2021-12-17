@@ -659,7 +659,8 @@ footer {
 
   .newsletter-container {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
+    margin-left: 6rem;
   }
   .newsletter-section {
     background-color: white;
