@@ -8,10 +8,9 @@ from asset_dashboard import models
 class stockTracker(viewsets.ModelViewSet):
     queryset = models.stock_tracker.objects.all()
     serializer_class = stockSerializer
+
     
     
-
-
 class cryptoTracker(viewsets.ModelViewSet):
     queryset = models.crypto_tracker.objects.all()
     serializer_class = cryptoSerializer

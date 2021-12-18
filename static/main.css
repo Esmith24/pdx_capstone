@@ -438,13 +438,33 @@ footer {
   }
 
   #article-img {
-    border: 1px solid black;
     height: 15rem;
-    width: 19rem;
+    width: 28rem;
     object-fit: cover;
   }
   aside {
     display: none;
+  }
+
+  .small-article-contianer {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .small-img-container {
+    text-align: center;
+    width: fit-content;
+  }
+
+  #small-article-img {
+    object-fit: cover;
+    width: 70%;
+    max-height: 20rem;
+  }
+
+  .small-article-info {
+    width: 1rem;
+    text-overflow: ellipsis;
   }
 
   .newsletter-container {
@@ -655,6 +675,10 @@ footer {
   #article-img {
     height: 15rem;
     object-fit: cover;
+  }
+
+  .small-article-contianer {
+    display: flex;
   }
 
   .newsletter-container {

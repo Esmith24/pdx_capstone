@@ -56,7 +56,7 @@
                             <td>[[object.cost_per_share]]</td>
                             <td>[[object.asset]]</td>
                             <td>[[object.long_or_short]]</td>
-                            <td><button @click="createStock" class="delete-btn">Submit</button></td>
+                            <td><button @click="deleteStock(object.id)" class="delete-btn">Submit</button></td>
                         </tr>
                     </table>
                 </div>
@@ -107,7 +107,7 @@
                                 <td>[[object.cost_per_share]]</td>
                                 <td>[[object.asset]]</td>
                                 <td>[[object.long_or_short]]</td>
-                                <td><button @click="createCrypto" class="delete-btn">Submit</button></td>
+                                <td><button @click="deleteCrypto(object.id)" class="delete-btn">Submit</button></td>
                             </tr>
                         </table>
                     </div>
@@ -376,9 +376,26 @@
                         config
                     );
                 },
-                deleteStock: function () {
+                deleteStock: function (objId) {
+                    axios({
+                        method: 'delete',
+                        url: `http://127.0.0.1:8000/api/v1/stock/${objId}/`,
 
-                }
+                    }).then(response => {
+                        this.loadAllStocks()
+                    })
+                },
+                deleteCrypto: function (objId) {
+                    axios({
+                        method: 'delete',
+                        url: `http://127.0.0.1:8000/api/v1/crypto/${objId}/`,
+
+                    }).then(response => {
+                        this.loadAllCrypto()
+                        this.loadcryptochart()
+                    })
+                },
+
             },
             created: function () {
                 this.loadAllStocks(),

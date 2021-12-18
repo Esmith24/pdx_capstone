@@ -94,6 +94,52 @@
 
             </article>
         </div>
+
+        <div class="small-article-contianer">
+            <article class="article-5 small-article">
+                <div class="small-img-container">
+                    <img id="small-article-img" :src="[[ news.data[4].links.uriImage ]]" alt="">
+                </div>
+                <br>
+                <div class="small-article-info">
+                    [[ news.data[5].attributes.title ]]
+                    <a :href="[[ news.data[5].links.canonical ]]" target="_blank">To article</a>
+                </div>
+            </article>
+
+            <article class="article-6 small-article">
+                <div class="small-img-container">
+                    <img id="small-article-img" :src="[[ news.data[4].links.uriImage ]]" alt="">
+                </div>
+                <br>
+                <div class="small-article-info">
+                    [[ news.data[6].attributes.title ]]
+                    <a :href="[[ news.data[6].links.canonical ]]" target="_blank">To article</a>
+                </div>
+            </article>
+
+            <article class="article-7 small-article">
+                <div class="img-container">
+                    <img id="small-article-img" :src="[[ news.data[4].links.uriImage ]]" alt="">
+                </div>
+                <br>
+                <div class="small-article-info">
+                    [[ news.data[7].attributes.title ]]
+                    <a :href="[[ news.data[7].links.canonical ]]" target="_blank">To article</a>
+                </div>
+            </article>
+
+            <article class="article-8 small-article">
+                <div class="img-container">
+                    <img id="small-article-img" :src="[[ news.data[4].links.uriImage ]]" alt="">
+                </div>
+                <br>
+                <div class="small-article-info">
+                    [[ news.data[8].attributes.title ]]
+                    <a :href="[[ news.data[8].links.canonical ]]" target="_blank">To article</a>
+                </div>
+            </article>
+        </div>
     </div>
 </main>
 
@@ -128,7 +174,7 @@
                 axios({
                     method: 'GET',
                     url: 'https://seeking-alpha.p.rapidapi.com/news/v2/list-trending',
-                    params: { until: '0', since: '0', size: '7' },
+                    params: { until: '0', since: '0', size: '10' },
                     headers: {
                         'x-rapidapi-host': 'seeking-alpha.p.rapidapi.com',
                         'x-rapidapi-key': '3626506961msh6043bed195d39acp11b912jsna00bcc337f5c'
