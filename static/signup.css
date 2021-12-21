@@ -299,4 +299,78 @@ footer {
   .nav-links li.button {
     padding-right: 0;
   }
+  /* -------------------    Footer ------------------------- */
+  footer {
+    background-color: black;
+    color: #ffffff;
+    grid-area: footer;
+    height: 25rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 40vw 20vw 40vw;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "logo  . social-header"
+      "links . social-links"
+      ".     .      info";
+  }
+
+  .footer-logo {
+    grid-area: logo;
+    text-decoration: underline;
+    width: fit-content;
+    padding: 2rem 0 1rem 0;
+    margin: 2rem;
+    font-size: 2rem;
+  }
+
+  .footer-links {
+    grid-area: links;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin: 0 8rem;
+  }
+
+  .social-header {
+    text-decoration: underline;
+    grid-area: social-header;
+    margin: 4rem 0 0 11rem;
+    font-size: 2rem;
+  }
+
+  .social-links {
+    grid-area: social-links;
+    margin-left: 8rem;
+  }
+
+  .footer-info {
+    grid-area: info;
+    width: 26rem;
+    font-size: 26px;
+    text-align: center;
+    margin: 1rem 1rem 1rem 2rem;
+  }
+
+  .footer-links li {
+    list-style: none;
+    padding: 0.5rem;
+  }
+
+  .footer-links a {
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .footer-links a:hover {
+    color: #4b369e;
+  }
+
+  .footer {
+    grid-area: info;
+    text-align: center;
+    margin: 1rem;
+  }
 }

@@ -23,6 +23,10 @@ header {
   align-items: center;
 }
 
+.header {
+  margin: 1rem 0 2rem 0;
+}
+
 .header-nav-item a {
   color: aliceblue;
   text-decoration: none;
@@ -68,24 +72,21 @@ aside {
   text-decoration: none;
 }
 
-.section-1 {
-}
-
-.section-2 {
-}
 .cryptoInput {
+  margin: 1rem 0 1rem 0;
   text-align: center;
   border: 1px solid black;
   width: 10rem;
 }
 .stock-input {
+  margin: 1rem 0 1rem 0;
   text-align: center;
   border: 1px solid black;
   width: 10rem;
 }
 
-.crypto-input {
-  margin: 1rem;
+#stock-select {
+  width: 90%;
 }
 
 main {

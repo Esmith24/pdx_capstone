@@ -331,23 +331,25 @@ footer {
   display: flex;
   flex-direction: column;
   width: fit-content;
-  margin: 0 4rem;
+  margin: 0 8rem;
 }
 
 .social-header {
   text-decoration: underline;
   grid-area: social-header;
-  margin: 4rem 0 0 0;
+  margin: 4rem 0 0 11rem;
   font-size: 2rem;
 }
 
 .social-links {
   grid-area: social-links;
+  margin-left: 8rem;
 }
 
 .footer-info {
   grid-area: info;
   width: 26rem;
+  font-size: 26px;
 }
 
 .footer-links li {

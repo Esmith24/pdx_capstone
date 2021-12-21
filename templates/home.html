@@ -26,22 +26,48 @@
         <div class="article-grid-container">
             <aside>
                 <div class="content-container">
-                    <div class="aside-content one">
-                        [[stock.marketSummaryAndSparkResponse.result[0].shortName]]
-                    </div>
-                    <div class="aside-content two">
+                    <div class="aside-content">
+                        <h3 id="aside-header">Previous close</h3>
+                        <div class="aside-info">
+                            [[stock.marketSummaryAndSparkResponse.result[0].shortName]]<br>
+                            [[stock.marketSummaryAndSparkResponse.result[0].regularMarketPreviousClose.fmt]]
+                        </div>
+                        <div class="aside-info">
+                            [[stock.marketSummaryAndSparkResponse.result[1].shortName]]<br>
+                            [[stock.marketSummaryAndSparkResponse.result[1].regularMarketPreviousClose.fmt]]
+                        </div>
+                        [[stock.marketSummaryAndSparkResponse.result[2].shortName]]<br>
+                        [[stock.marketSummaryAndSparkResponse.result[2].regularMarketPreviousClose.fmt]]
+                        <div class="aside-info">
+                            [[stock.marketSummaryAndSparkResponse.result[3].shortName]]<br>
+                            [[stock.marketSummaryAndSparkResponse.result[3].regularMarketPreviousClose.fmt]]
+                        </div>
+                        <div class="aside-info">
+                            [[stock.marketSummaryAndSparkResponse.result[4].shortName]]<br>
+                            [[stock.marketSummaryAndSparkResponse.result[4].regularMarketPreviousClose.fmt]]
+                        </div>
+                        <div class="second-aside">
+                            <h3 id="aside-header">Top Gainers</h3>
+                            <div class="aside-info">
+                                [[gainer.finance.result[0].quotes[0].symbol]]
+                            </div>
+                            <div class="aside-info">
+                                [[gainer.finance.result[0].quotes[1].symbol]]
+                            </div>
 
-                    </div>
-                    <div class="aside-content three">
-
+                            <div class="aside-info">
+                                [[gainer.finance.result[0].quotes[2].symbol]]
+                            </div>
+                            <div class="aside-info">
+                                [[gainer.finance.result[0].quotes[3].symbol]]
+                            </div>
+                        </div>
                     </div>
                 </div>
             </aside>
 
             <article class="main-article-1">
-                <div class="main-img-container">
-                    <img id="main-article-img" :src="[[ news.data[0].links.uriImage ]]" alt="">
-                </div>
+                <img id="main-article-img" :src="[[ news.data[0].links.uriImage ]]" alt="">
                 <br>
                 <div class="main-article-info">
                     [[ news.data[0].attributes.title ]]
@@ -95,12 +121,11 @@
             </article>
         </div>
 
-        <div class="small-article-contianer">
+        <!--<div class="small-article-contianer">
             <article class="article-5 small-article">
-                <div class="small-img-container">
-                    <img id="small-article-img" :src="[[ news.data[4].links.uriImage ]]" alt="">
-                </div>
+                <img id="small-article-img" :src="[[ news.data[4].links.uriImage ]]" alt="">
                 <br>
+
                 <div class="small-article-info">
                     [[ news.data[5].attributes.title ]]
                     <a :href="[[ news.data[5].links.canonical ]]" target="_blank">To article</a>
@@ -108,9 +133,7 @@
             </article>
 
             <article class="article-6 small-article">
-                <div class="small-img-container">
-                    <img id="small-article-img" :src="[[ news.data[4].links.uriImage ]]" alt="">
-                </div>
+                <img id="small-article-img" :src="[[ news.data[4].links.uriImage ]]" alt="">
                 <br>
                 <div class="small-article-info">
                     [[ news.data[6].attributes.title ]]
@@ -119,27 +142,27 @@
             </article>
 
             <article class="article-7 small-article">
-                <div class="img-container">
-                    <img id="small-article-img" :src="[[ news.data[4].links.uriImage ]]" alt="">
-                </div>
+                <img id="small-article-img" :src="[[ news.data[4].links.uriImage ]]" alt="">
                 <br>
                 <div class="small-article-info">
                     [[ news.data[7].attributes.title ]]
                     <a :href="[[ news.data[7].links.canonical ]]" target="_blank">To article</a>
-                </div>
+                </div> 
             </article>
 
             <article class="article-8 small-article">
-                <div class="img-container">
-                    <img id="small-article-img" :src="[[ news.data[4].links.uriImage ]]" alt="">
-                </div>
+                <img id="small-article-img" :src="[[ news.data[4].links.uriImage ]]" alt="">
                 <br>
                 <div class="small-article-info">
                     [[ news.data[8].attributes.title ]]
                     <a :href="[[ news.data[8].links.canonical ]]" target="_blank">To article</a>
-                </div>
+                </div
             </article>
-        </div>
+            <input type="radio" name="content" id="i1">
+            <input type="radio" name="content" id="i2">
+            <input type="radio" name="content" id="i3">
+            <input type="radio" name="content" id="i4">
+        </div>-->
     </div>
 </main>
 
@@ -168,6 +191,7 @@
         data: {
             news: [],
             stock: [],
+            gainer: []
         },
         methods: {
             loadNews: function () {
@@ -195,11 +219,25 @@
                 }).then(response => {
                     this.stock = response.data
                 })
+            },
+            loadgainers: function () {
+                axios({
+                    method: 'get',
+                    url: 'https://yh-finance.p.rapidapi.com/market/v2/get-movers',
+                    params: { region: 'US' },
+                    headers: {
+                        'x-rapidapi-host': 'yh-finance.p.rapidapi.com',
+                        'x-rapidapi-key': '3626506961msh6043bed195d39acp11b912jsna00bcc337f5c'
+                    }
+                }).then(response => {
+                    this.gainer = response.data
+                })
             }
         },
         mounted: function () {
             this.loadNews()
             this.loadStock()
+            this.loadgainers()
         }
     })
 

@@ -39,7 +39,7 @@
 
             {% csrf_token %}
             <main>
-                <h2>Stock Tracker</h2>
+                <h2 class="header">Stock Tracker</h2>
                 <div v-for="object in stock">
                     <table border="1" width="500" cellspacing="1">
                         <tr>
@@ -67,7 +67,7 @@
                     <input type="text" v-model="stock_quantity" placeholder="Quantity"><br>
                     <input type="text" v-model="stock_cost_per_share" placeholder="Cost"><br>
 
-                    <br><label for="">Asset</label><br>
+                    <label for="">Asset</label><br>
                     <select v-model="stock_asset" name="stock_long_or_short" id="stock-select">
                         <option value="Equites">Equites</option>
                         <option value="Bonds">Bonds</option>
@@ -78,19 +78,16 @@
                         <option value="Long">Long</option>
                         <option value="Short">Short</option>
                     </select>
-                    <br><button @click="createStock">Submit</button>
+                    <br>
+                    <button @click="createStock">Submit</button>
                 </div>
 
                 <div class="chart-container">
                     <canvas id="myChart1"></canvas>
-
-                    <input id="pushValue" type="text" class="">
-                    <button id="push">Submit</button>
-
                 </div>
 
                 <div class="section-1">
-                    <h2>Crypto Tracker</h2>
+                    <h2 class="header">Crypto Tracker</h2>
                     <div v-for="object in crypto">
                         <table border="1" width="500" cellspacing="1">
                             <tr>
@@ -305,11 +302,11 @@
                     }
 
                     const labels1 = [
+                        'RIOT',
                         'MARA',
-                        'PLTR',
+                        'TSLA',
                         'LCID',
-                        'LCID',
-                        'COIN',
+
                     ];
 
                     const data1 = {
@@ -319,7 +316,6 @@
                             backgroundColor: [
                                 '#5e42cc'
                             ],
-                            barThickness: 50,
                             hoverOffset: 4,
                             borderColor: 'rgb(255, 99, 132)',
                             data: dataArray,
@@ -346,11 +342,11 @@
                     }
                     console.log(CryptoDataArray)
                     const labels = [
-                        'January',
-                        'February',
-                        'March',
-                        'April',
-                        'May',
+                        'DOT',
+                        'ETH',
+                        'ADA',
+                        'SOL',
+
                     ];
 
                     const data = {
