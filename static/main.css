@@ -462,12 +462,6 @@ footer {
     border: solid 10px #2c2c2c;
   }
 
-  .small-article {
-  }
-
-  .small-article-info {
-  }
-
   .newsletter-container {
     display: flex;
     justify-content: space-evenly;
@@ -652,12 +646,14 @@ footer {
   .article-grid-container {
     height: 80rem;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 400px 400px;
     grid-template-columns: 25px 1fr 1fr 1fr;
     grid-template-areas:
       ". article-1 article-1 aside"
       ". article-2 article-3 aside"
-      ". article-4 article-5 aside";
+      ". article-4 article-5 aside"
+      ". carousel  carousel  carousel"
+      ". newsletter newsletter newsletter";
   }
 
   .secondary-article {
@@ -693,11 +689,15 @@ footer {
     object-fit: cover;
   }
 
-  .small-article-contianer {
-    display: flex;
+  .carousel {
+    grid-area: carousel;
+    width: 200px;
+    height: 200px;
+    background-color: #222;
   }
 
   .newsletter-container {
+    grid-area: newsletter;
     display: flex;
     margin-left: 2rem;
     margin-top: 10rem;

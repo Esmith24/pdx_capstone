@@ -135,6 +135,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'dashboard-home'
 LOGOUT_REDIRECT_URL = 'home'
 
+
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
@@ -144,3 +146,6 @@ REST_FRAMEWORK = {
     ),
 
 }
+
+import django_on_heroku
+django_on_heroku.settings(locals())
