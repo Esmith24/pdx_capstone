@@ -117,12 +117,43 @@
                     [[ news.data[4].attributes.title ]]
                     <a :href="[[ news.data[4].links.canonical ]]" target="_blank">To article</a>
                 </div>
-
             </article>
         </div>
 
+
+        <div class="carousel">
+            <button class="carousel__button carousel__button--left"><img src="{% static 'img/left-arrow.svg' %}"
+                    alt=""></button>
+            <div class="carousel__track-container">
+                <ul class="carousel__track">
+                    <li class="carousel__slide">
+                        <img :src="[[ news.data[5].links.uriImage ]]" alt="" class="carousel__image">
+                        <a :href="[[ news.data[5].links.canonical ]]" target="_blank">To article</a>
+                    </li>
+
+                    <li class="carousel__slide">
+                        <img :src="[[ news.data[6].links.uriImage ]]" alt="" class="carousel__image">
+                        <a :href="[[ news.data[6].links.canonical ]]" target="_blank">To article</a>
+                    </li>
+
+                    <li class="carousel__slide">
+                        <img :src="[[ news.data[6].links.uriImage ]]" alt="" class="carousel__image">
+                        <a :href="[[ news.data[6].links.canonical ]]" target="_blank">To article</a>
+                    </li>
+                </ul>
+            </div>
+            <button class="carousel__button carousel__button--right"><img src="{% static 'img/right-arrow.svg' %}"
+                    alt=""></button>
+
+            <div class="carousel__nav">
+                <button class="carousel__indicator current-slide"></button>
+                <button class="carousel__indicator"></button>
+                <button class="carousel__indicator"></button>
+            </div>
+        </div>
     </div>
 </main>
+
 
 <div class="newsletter-container">
     <section class="newsletter-section">
@@ -138,6 +169,7 @@
         </div>
     </section>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -200,5 +232,43 @@
     })
 
 
+</script>
+
+<script>
+    const track = document.querySelector('.carousel__track');
+    const slides = Array.from(track.children);
+    const nextButton = document.querySelector('.carousel__button--right');
+    const prevButton = document.querySelector('.carousel__button--left');
+    const dotsNav = document.querySelector('.carousel__nav');
+    const dots = Array.from(dotsNav.children);
+    const slideWidth = slides[0].getBoundingClientRect().width;
+
+    //arrange the slides next to one another
+    const setSlidePosition = (slide, index) => {
+        slide.style.left = slideWidth * index + 'px'
+    };
+    slides.forEach(setSlidePosition);
+
+    const moveToSlide = (track, currentSlide, targetSlide) => {
+        track.style.transform = 'translateX(-' + targetSlide.style.left + ')';
+        currentSlide.classList.remove('current-slide');
+        targetSlide.classList.add('current-slide');
+    }
+
+    //when I click, move slides to left
+    prevButton.addEventListener('click', e => {
+        const currentSlide = track.querySelector('.current-slide');
+        const prevSlide = currentSlide.previousElementSibling;
+
+        moveToSlide(track, currentSlide, prevSlide)
+    })
+
+    // when I click, move slides to the right
+    nextButton.addEventListener('click', e => {
+        const currentSlide = track.querySelector('.current-slide');
+        const nextSlide = currentSlide.nextElementSibling;
+
+        moveToSlide(track, currentSlide, nextSlide);
+    })
 </script>
 {% endblock %}
