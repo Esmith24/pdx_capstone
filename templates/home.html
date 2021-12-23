@@ -154,7 +154,6 @@
     </div>
 </main>
 
-
 <div class="newsletter-container">
     <section class="newsletter-section">
         <h3 id="newsletter-head">Newsletter</h3>
@@ -170,7 +169,7 @@
     </section>
 </div>
 
-
+<script src="{% static 'carousel.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
@@ -234,41 +233,5 @@
 
 </script>
 
-<script>
-    const track = document.querySelector('.carousel__track');
-    const slides = Array.from(track.children);
-    const nextButton = document.querySelector('.carousel__button--right');
-    const prevButton = document.querySelector('.carousel__button--left');
-    const dotsNav = document.querySelector('.carousel__nav');
-    const dots = Array.from(dotsNav.children);
-    const slideWidth = slides[0].getBoundingClientRect().width;
 
-    //arrange the slides next to one another
-    const setSlidePosition = (slide, index) => {
-        slide.style.left = slideWidth * index + 'px'
-    };
-    slides.forEach(setSlidePosition);
-
-    const moveToSlide = (track, currentSlide, targetSlide) => {
-        track.style.transform = 'translateX(-' + targetSlide.style.left + ')';
-        currentSlide.classList.remove('current-slide');
-        targetSlide.classList.add('current-slide');
-    }
-
-    //when I click, move slides to left
-    prevButton.addEventListener('click', e => {
-        const currentSlide = track.querySelector('.current-slide');
-        const prevSlide = currentSlide.previousElementSibling;
-
-        moveToSlide(track, currentSlide, prevSlide)
-    })
-
-    // when I click, move slides to the right
-    nextButton.addEventListener('click', e => {
-        const currentSlide = track.querySelector('.current-slide');
-        const nextSlide = currentSlide.nextElementSibling;
-
-        moveToSlide(track, currentSlide, nextSlide);
-    })
-</script>
 {% endblock %}
