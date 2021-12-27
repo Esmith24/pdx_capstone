@@ -43,6 +43,7 @@ a:hover {
 
 .logo a {
   font-size: 20px;
+  font-family: "Poppins", sans-serif;
 }
 
 .button.secondary {
@@ -231,6 +232,7 @@ main {
   text-align: center;
   margin: 0 0 1rem 0;
   border-bottom: 1px solid silver;
+  font-family: "Oswald", sans-serif;
 }
 
 .newsletter {
@@ -780,14 +782,14 @@ footer {
     display: flex;
     margin-left: 1rem;
     margin-top: -8rem;
-    width: 52rem;
+    width: 51rem;
   }
   .newsletter-section {
     background-color: white;
     color: black;
     height: 21rem;
     box-shadow: 0px 4px 11px rgb(109, 108, 108);
-    width: 40rem;
+    width: 44rem;
   }
 
   #newsletter-head {

@@ -1,3 +1,4 @@
+console.log("hello")
 const track = document.querySelector('.carousel__track');
     const slides = Array.from(track.children);
     const nextButton = document.querySelector('.carousel__button--right');
