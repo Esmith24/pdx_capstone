@@ -207,7 +207,7 @@
                 loadAllStocks: function () {
                     axios({
                         method: 'get',
-                        url: 'api/v1/stock/',
+                        url: 'https://stock-crypto.herokuapp.com/dashboard/api/v1/stock/',
 
                     }).then(response => {
                         this.stock = response.data
@@ -221,7 +221,7 @@
 
                     axios({
                         method: 'post',
-                        url: 'api/v1/stock/',
+                        url: 'https://stock-crypto.herokuapp.com/dashboard/api/v1/stock/',
 
                         header: {
                             "X-CSRFToken": csrf
@@ -254,7 +254,7 @@
                 loadAllCrypto: function () {
                     axios({
                         method: 'get',
-                        url: 'api/v1/crypto/',
+                        url: 'https://stock-crypto.herokuapp.com/dashboard/api/v1/crypto/',
 
                     }).then(response => {
                         this.crypto = response.data
@@ -269,7 +269,7 @@
 
                     axios({
                         method: 'post',
-                        url: 'api/v1/crypto/',
+                        url: 'https://stock-crypto.herokuapp.com/dashboard/api/v1/crypto/',
 
                         header: {
                             "X-CSRFToken": csrf
@@ -375,7 +375,7 @@
                 deleteStock: function (objId) {
                     axios({
                         method: 'delete',
-                        url: `api/v1/stock/${objId}/`,
+                        url: `https://stock-crypto.herokuapp.com/dashboard/api/v1/stock/${objId}/`,
 
                     }).then(response => {
                         this.loadAllStocks()
@@ -384,7 +384,7 @@
                 deleteCrypto: function (objId) {
                     axios({
                         method: 'delete',
-                        url: `api/v1/crypto/${objId}/`,
+                        url: `https://stock-crypto.herokuapp.com/dashboard/api/v1/crypto/${objId}/`,
 
                     }).then(response => {
                         this.loadAllCrypto()
